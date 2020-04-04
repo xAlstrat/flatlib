@@ -337,11 +337,13 @@ LIST_ASPECTS_NEG = [
     SQUARE, OPPOSITION
 ]
 
-"""MH on 2018/3/6 - List of tight orbs"""
+"""
+- Asteroids Orbs at http://straightwoo.com/2016/05/23/asteroids-astrology-use/
+- Donna Cunningham’s system of giving 10 degrees
+This library should allow using dynamic orbs.
+"""
 
-# Asteroids Orbs at http://straightwoo.com/2016/05/23/asteroids-astrology-use/
-# Donna Cunningham’s system of giving 10 degrees to asteroids
-# I decided using the same as Chiron.
+"""MH on 2018/3/6 - List of tight orbs"""
 
 LIST_ORBS_TIGHT = {
     NO_PLANET: 0,
@@ -418,4 +420,3 @@ HOUR = 0.04166666651144624
 
 TRADITIONAL_HOUSE_OFFSET = -5
 MODERN_HOUSE_OFFSET = 0
-EVOLUTIVE_HOUSE_OFFSET = -3
