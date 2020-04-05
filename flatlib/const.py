@@ -111,15 +111,6 @@ PALLAS = 'Pallas'
 JUNO = 'Juno'
 VESTA = 'Vesta'
 
-ASTEROID_LIST = [
-    CHIRON,
-    PHOLUS,
-    CERES,
-    PALLAS,
-    JUNO,
-    VESTA
-]
-
 # Object movement
 DIRECT = 'Direct'
 RETROGRADE = 'Retrogade'
@@ -310,6 +301,20 @@ LIST_HOUSES = [
 
 LIST_ANGLES = [
     ASC, MC, DESC, IC
+]
+
+LIST_ASTEROIDS = [
+    CHIRON,
+    PHOLUS,
+    CERES,
+    PALLAS,
+    JUNO,
+    VESTA
+]
+
+LIST_MOON_NODES = [
+    NORTH_NODE,
+    SOUTH_NODE
 ]
 
 LIST_FIXED_STARS = [
