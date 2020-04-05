@@ -95,43 +95,42 @@ class GenericObject:
 
 
 # -------------------- #
-#   Astrology Object   #
+#    Orbital Object    #
 # -------------------- #
 
-class Object(GenericObject):
-    """ This class represents an Astrology object, such
-    as the sun or the moon, and includes properties and
-    functions which are common for all objects.
-    
+class OrbitalObject(GenericObject):
+    """ This class represents an orbital object, such
+    as planets and asteroids.
+
     """
-    
+
     def __init__(self):
         super().__init__()
         self.type = const.OBJ_PLANET
         self.lonspeed = 0.0
         self.latspeed = 0.0
-        
+
     def __str__(self):
         string = super().__str__()[:-1]
         return '%s %s>' % (
             string,
             angle.toString(self.lonspeed)
         )
-    
+
     # === Properties === #
-    
+
     def orb(self):
         """ Returns the orb of this object. """
         return props.object.orb[self.id]
-    
+
     def meanMotion(self):
         """ Returns the mean daily motion of this object. """
         return props.object.meanMotion[self.id]
-    
+
     def movement(self):
-        """ Returns if this object is direct, retrograde 
-        or stationary. 
-        
+        """ Returns if this object is direct, retrograde
+        or stationary.
+
         """
         if abs(self.lonspeed) < 0.0003:
             return const.STATIONARY
@@ -139,36 +138,48 @@ class Object(GenericObject):
             return const.DIRECT
         else:
             return const.RETROGRADE
-        
-    def gender(self):
-        """ Returns the gender of this object. """
-        return props.object.gender[self.id]
-    
-    def faction(self):
-        """ Returns the faction of this object. """
-        return props.object.faction[self.id]
-    
-    def element(self):
-        """ Returns the element of this object. """
-        return props.object.element[self.id]
-    
+
     # === Functions === #
-    
+
     def isDirect(self):
         """ Returns if this object is in direct motion. """
         return self.movement() == const.DIRECT
-    
+
     def isRetrograde(self):
         """ Returns if this object is in retrograde motion. """
         return self.movement() == const.RETROGRADE
-    
+
     def isStationary(self):
         """ Returns if this object is stationary. """
         return self.movement() == const.STATIONARY
-    
+
     def isFast(self):
         """ Returns if this object is in fast motion. """
         return abs(self.lonspeed) >= self.meanMotion()
+
+
+# -------------------- #
+#   Astrology Object   #
+# -------------------- #
+
+class Object(OrbitalObject):
+    """ This class represents an Astrology object, such
+    as the sun or the moon, and includes properties and
+    functions which are common for all objects.
+
+    """
+
+    def gender(self):
+        """ Returns the gender of this object. """
+        return props.object.gender[self.id]
+
+    def faction(self):
+        """ Returns the faction of this object. """
+        return props.object.faction[self.id]
+
+    def element(self):
+        """ Returns the element of this object. """
+        return props.object.element[self.id]
 
 
 # -------------------- #
@@ -186,7 +197,7 @@ class MoonNode(GenericObject):
 #   Asteroid Object   #
 # -------------------- #
 
-class Asteroid(GenericObject):
+class Asteroid(OrbitalObject):
 
     def __init__(self):
         super().__init__()

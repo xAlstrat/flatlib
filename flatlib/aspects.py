@@ -139,6 +139,11 @@ def _aspectProperties(obj1, obj2, aspDict):
     
     if asp == const.NO_ASPECT:
         return prop
+
+    # Get props only when an orbital object is involved
+    # This allows to calc aspects between non-orbital objects, like aspects between Asc and North Node, or Asc and MC
+    if obj1.type not in const.LIST_ORBITAL_OBJ:
+        return prop
     
     # Aspect within orb
     prop1['inOrb'] = orb <= obj1.orb()
@@ -182,8 +187,8 @@ def _aspectProperties(obj1, obj2, aspDict):
 
 def _getActivePassive(obj1, obj2):
     """ Returns which is the active and the passive objects. """
-    speed1 = abs(obj1.lonspeed) if obj1.isPlanet() else -1.0
-    speed2 = abs(obj2.lonspeed) if obj2.isPlanet() else -1.0
+    speed1 = abs(obj1.lonspeed) if obj1.type in const.LIST_ORBITAL_OBJ else -1.0
+    speed2 = abs(obj2.lonspeed) if obj2.type in const.LIST_ORBITAL_OBJ else -1.0
     if speed1 > speed2:
         return {
             'active': obj1,
@@ -237,7 +242,7 @@ def getAspect(obj1, obj2, aspList):
             'type': const.NO_ASPECT,
             'orb': 0,
             'separation': 0,
-        } 
+        }
     aspProp = _aspectProperties(ap['active'], ap['passive'], aspDict)
     return Aspect(aspProp)
 
