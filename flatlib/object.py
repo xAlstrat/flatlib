@@ -15,7 +15,6 @@ from . import utils
 from . import props
 
 
-
 # ------------------ #
 #   Generic Object   #
 # ------------------ #
@@ -24,16 +23,18 @@ class GenericObject:
     """ This class represents a generic object and
     includes properties which are common to all 
     objects on a chart.
-    
+
+    orbs: dict of orbs to use instead of const.LIST_ORBS
     """
     
-    def __init__(self):
+    def __init__(self, orbs=const.LIST_ORBS):
         self.id = const.NO_PLANET
         self.type = const.OBJ_GENERIC
         self.lon = 0.0
         self.lat = 0.0
         self.sign = const.ARIES
         self.signlon = 0.0
+        self.orbs = orbs
         
     @classmethod
     def fromDict(cls, _dict):
@@ -128,7 +129,7 @@ class OrbitalObject(GenericObject):
 
     def orb(self):
         """ Returns the orb of this object. """
-        return props.object.orb[self.id]
+        return self.orbs[self.id] if self.id in self.orbs else -1
 
     def meanMotion(self):
         """ Returns the mean daily motion of this object. """
